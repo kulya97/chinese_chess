@@ -34,15 +34,7 @@ QPoint chessboard::pos2coor(QPoint pos){
     QPoint coor(-1,-1);
     for(int i=0;i<10;i++){
         for(int j=0;j<9;j++){
-<<<<<<< HEAD
-            if(getdistance2(chessboard_coor[i][j],pos)<900){
-=======
-<<<<<<< HEAD
-            if(getdistance2(chessboard_coor[i][j],pos)<900){
-=======
             if(getdistance2(chessboard_coor[i][j],pos)<950){
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
                 coor=QPoint(j,i);
                 break;
             }
@@ -51,23 +43,11 @@ QPoint chessboard::pos2coor(QPoint pos){
     return coor;
 }
 void chessboard::setchess(chessman *chess,QPoint coor){
-<<<<<<< HEAD
-    chessboard_data[coor.ry()][coor.rx()]=chess;
-    chessboard_data[chess->getcoorY()][chess->getcoorX()]=nullptr;
-    chess->setcoor(coor);
-=======
-<<<<<<< HEAD
-    chessboard_data[coor.ry()][coor.rx()]=chess;
-    chessboard_data[chess->getcoorY()][chess->getcoorX()]=nullptr;
-    chess->setcoor(coor);
-=======
     QPoint mcoor=chess->getcoor();
     chess->setcoor(coor);
     chessboard_data[mcoor.ry()][mcoor.rx()]=nullptr;
     chessboard_data[coor.ry()][coor.rx()]=nullptr;
     chessboard_data[coor.ry()][coor.rx()]=chess;
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
     chess->realmove(coor2pos(coor));
     setdata();
 }
@@ -81,16 +61,10 @@ void chessboard::setdata(){
     databackup.clear();
     databackup=data;
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 /*
  * 2020.11.16
  * 修改bug，更新棋盘数据时，只加载存活状态的棋子
  */
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
 void chessboard::updateboard(QList<chessman_data> datalist){
     for(int i=0;i<10;i++){
         for(int j=0;j<9;j++){
@@ -99,23 +73,11 @@ void chessboard::updateboard(QList<chessman_data> datalist){
     }
     for(int i=0;i<datalist.size();i++){
         chesslist.at(i)->setdata(datalist.at(i));
-<<<<<<< HEAD
-        chesslist.at(i)->realmove(coor2pos(chesslist.at(i)->getcoor()));
-        chessboard_data[ chesslist.at(i)->getcoorY()][chesslist.at(i)->getcoorX()]=chesslist.at(i);
-        chesslist.at(i)->update();
-=======
-<<<<<<< HEAD
-        chesslist.at(i)->realmove(coor2pos(chesslist.at(i)->getcoor()));
-        chessboard_data[ chesslist.at(i)->getcoorY()][chesslist.at(i)->getcoorX()]=chesslist.at(i);
-        chesslist.at(i)->update();
-=======
         chesslist.at(i)->update();
         chesslist.at(i)->realmove(coor2pos(chesslist.at(i)->getcoor()));
         if(chesslist.at(i)->isalive()){
         chessboard_data[chesslist.at(i)->getcoorY()][chesslist.at(i)->getcoorX()]=chesslist.at(i);
         }
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
     }
 }
 bool chessboard::regret(){
@@ -144,12 +106,6 @@ void chessboard::resetboard(){
     }
     data.clear();
     chesslist.clear();
-<<<<<<< HEAD
-}
-=======
-<<<<<<< HEAD
-}
-=======
     databackup.clear();
 }
 /*
@@ -157,8 +113,6 @@ void chessboard::resetboard(){
  * 增加，原位移动（不影响最终结果，为了结构好看因为目标位置与自身国家相同）
  * 完善规则，别象眼，别马腿
  */
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
 bool chessboard::movechess(chessman *chess, QPoint coor){
     QPoint mcoor= chess->getcoor();
     double mdistance =getdistance2(mcoor,coor);
@@ -169,18 +123,6 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
     int stepx=(mx>0)?1:-1;
     int stepy=(my>0)?1:-1;
     int chesscount=0;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 06c9e9d... 修复悔棋bug
-    if(isexistchess(coor)){//目标位置存在棋子
-        if(issamecountry(chess,getchessfromcoor(coor))){//是相同国家,直接结束
-            return false;
-        }
-        if(mprefession==PAO){//执行吃子特殊规则（将帅相对）
-<<<<<<< HEAD
-=======
-=======
     if(mcoor==coor){//放回原位
         return false;
     }
@@ -194,8 +136,6 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
             return false;
         }
         if(mprefession==PAO){//执行吃子特殊规则（打炮）
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
             if(mcoor.rx()!=coor.rx()&&mcoor.ry()!=coor.ry()){//不是同一行或者列
                 return false;
             }
@@ -212,15 +152,7 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
                     }
                 }
             }
-<<<<<<< HEAD
-            if(chesscount!=1){//中间有一个棋子
-=======
-<<<<<<< HEAD
-            if(chesscount!=1){//中间有一个棋子
-=======
             if(chesscount!=1){//中间棋子个数超过1
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
                 return false;
             }
         }else if(mprefession==JIANG){//执行吃子特殊规则（将帅相对）
@@ -237,14 +169,6 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
         return true;
     }
     switch (mprefession) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    qDebug()<<mprefession;
-    qDebug()<<mdistance;
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
     case JV:
         if(mcoor.rx()!=coor.rx()&&mcoor.ry()!=coor.ry()){//不是同一行或者列
             return false;
@@ -264,28 +188,6 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
         }
         break;
     case MA:
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 06c9e9d... 修复悔棋bug
-        qDebug()<<mdistance;
-        if(mdistance!=5){
-            return false;
-        }
-        if(mcoor.rx()==coor.rx()){
-            for(int i=mcoor.ry()+stepy;i!=coor.ry();i+=stepy){//中间无棋子
-                if(isexistchess(QPoint(mcoor.rx(),i))){
-                    return false;
-                }
-            }
-        }else if(mcoor.ry()==coor.ry()){
-            for(int i=mcoor.rx()+stepx;i!=coor.rx();i+=stepx){//中间无棋子
-                if(isexistchess(QPoint(i,mcoor.ry()))){
-                    return false;
-                }
-<<<<<<< HEAD
-=======
-=======
         if(mdistance!=5){
             return false;
         }
@@ -296,8 +198,6 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
         }else if(abs(mcoor.rx()-coor.rx())==2){
             if(isexistchess(QPoint(mcoor.rx()+stepx,mcoor.ry()))){
                 return false;
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
             }
         }
         break;
@@ -331,15 +231,9 @@ bool chessboard::movechess(chessman *chess, QPoint coor){
         if(mcountry==HAN&&coor.ry()<5){
             return false;
         }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
         if(isexistchess((coor+mcoor)/2)){//别象眼
             return false;
         }
->>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
->>>>>>> 06c9e9d... 修复悔棋bug
         break;
     case SHI:
         if(mdistance!=2){//斜对角的距离平方为2

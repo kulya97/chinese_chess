@@ -91,6 +91,13 @@ void chessman::setdata(chessman_data data){
 void chessman::update(){
     if(isalive()){
         show();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        chess_unchecked();
+>>>>>>> 1e94fa8... 修复悔棋之后死亡的棋子仍然占位的bug
+>>>>>>> 06c9e9d... 修复悔棋bug
     }else{
         hide();
     }
